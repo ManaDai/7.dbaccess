@@ -1,11 +1,11 @@
-package ex_popular_group_story;
+package sougou_ensyu;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class exam3_1_1 {
+public class exam3_4 {
 
     public static void main(String[] args) {
 
@@ -21,15 +21,15 @@ public class exam3_1_1 {
 
             con = DriverManager.getConnection(url, user, password);
             sql = """
-                    drop table if exists members;
-                    create table members(
-                        id serial primary key
-                        ,name text not null
-                        ,birth_day date
-                        ,gender varchar(1)
-                        ,color_id integer REFERENCES colors(id)
-                    )
-                    """;
+                    begin;
+                        update members
+                        set name = '大道寺真名'
+                        ,birth_day = '1996-09-20'
+                        ,gender = '女'
+                        ,color_id = 6
+                        where id = 1
+                        commit;
+                        """;
 
             pstmt = con.prepareStatement(sql);
             int numOfUpdate = pstmt.executeUpdate();
@@ -53,4 +53,5 @@ public class exam3_1_1 {
         }
 
     }
+
 }

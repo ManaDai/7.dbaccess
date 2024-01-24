@@ -1,17 +1,19 @@
-package ex_popular_group_story;
+package sougou_ensyu;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class exam3_2_1 {
+import org.postgresql.Driver;
+
+public class exam3_6 {
 
     public static void main(String[] args) {
 
         String url = "jdbc:postgresql://localhost:5432/student";
         String user = "postgres";
-        String password = "postgres";
+        String password = "postres";
 
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -21,16 +23,8 @@ public class exam3_2_1 {
 
             con = DriverManager.getConnection(url, user, password);
             sql = """
-                    insert into members
-                    (name, birth_day, gender, color_id)
-                    values('大野　智', '1980-11-26', '男', 1)
-                    ,('櫻井　翔', '1982-1-25', '男', 2)
-                    ,('相葉　雅紀', '1982-12-24', '男', 3)
-                    ,('二宮　和也', '1983-6-17', '男', 4)
-                    ,('松本　潤', '1983-8-30', '男', 5)
-
-
-                     """;
+                    drop table members
+                    """;
 
             pstmt = con.prepareStatement(sql);
             int numOfUpdate = pstmt.executeUpdate();
@@ -49,7 +43,6 @@ public class exam3_2_1 {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-
             }
         }
 

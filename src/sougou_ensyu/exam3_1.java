@@ -1,12 +1,9 @@
-package ex_popular_group_story;
+package sougou_ensyu;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.naming.spi.DirStateFactory.Result;
 
 public class exam3_1 {
 
@@ -23,13 +20,17 @@ public class exam3_1 {
         try {
 
             con = DriverManager.getConnection(url, user, password);
+
             sql = """
-                    drop table if exists colors;
-                    create table colors(
-                        id integer primary key
-                        ,name text
-                    )
-                    """;
+                    begin;
+                        drop table if exists colors;
+                        create table colors(
+                            id integer primary key
+                            ,name text
+                        )
+                    commit;
+
+                        """;
 
             pstmt = con.prepareStatement(sql);
             int numOfUpdate = pstmt.executeUpdate();
